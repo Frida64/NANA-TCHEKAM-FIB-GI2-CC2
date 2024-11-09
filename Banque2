@@ -1,0 +1,83 @@
+package paquet3;
+
+	class Client {
+	    private String nom;
+	    private String ville;
+	    private ComptePrive comptePrive;
+	    private CompteEpargne compteEpargne;
+
+	    public Client(String nom, String ville, double soldeComptePrivé, double soldeCompteEpargne) {
+	        this.nom = nom;
+	        this.ville = ville;
+	        this.comptePrive = new ComptePrive(soldeComptePrivé);
+	        this.compteEpargne = new CompteEpargne(soldeCompteEpargne);
+	    }
+
+	    public void afficherDonnées() {
+	        System.out.println("Client " + nom + " de " + ville);
+	        System.out.println("Compte privé : " + comptePrive.getSolde() + " francs");
+	        System.out.println("Compte d'épargne : " + compteEpargne.getSolde() + " francs");
+	    }
+
+	    public void bouclerComptes() {
+	        comptePrive.boucler();
+	        compteEpargne.boucler();
+	    }
+	}
+	// Classe ComptePrivé
+	 class ComptePrive {
+	    private double solde;
+	    private double tauxIntérêt;
+
+	    public ComptePrive(double solde) {
+	        this.solde = solde;
+	        this.tauxIntérêt = 0.02;
+	    }
+
+	    public double getSolde() {
+	        return solde;
+	    }
+	    public void boucler() {
+	        solde += solde * tauxIntérêt;
+	    }
+	}
+
+	// Classe CompteEpargne
+	class CompteEpargne {
+	    private double solde;
+	    private double tauxIntérêt;
+
+	    public CompteEpargne(double solde) {
+	        this.solde = solde;
+	        this.tauxIntérêt = 0.05;
+	    }
+
+	    public double getSolde() {
+	        return solde;
+	    }
+	    public void boucler() {
+	        solde += solde * tauxIntérêt;
+	    }
+	}
+
+	// Classe principale
+	public class Banque2 {
+
+		public static void main(String[] args) {
+	        Client pedro = new Client("Pedro", "Genève", 1000.0, 2000.0);
+	        Client alexandra = new Client("Alexandra", "Lausanne", 3000.0, 4000.0);
+
+	        System.out.println("Données avant le bouclement des comptes :");
+	        pedro.afficherDonnées();
+	        alexandra.afficherDonnées();
+
+	        pedro.bouclerComptes();
+	        alexandra.bouclerComptes();
+	        System.out.println("Données après le bouclement des comptes :");
+	        pedro.afficherDonnées();
+	        alexandra.afficherDonnées();
+	    }
+
+
+
+	}
